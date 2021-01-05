@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Groupes{% endblock %}
+
+{% block body %}
+    <div class="container">
+    <br>
+    <h1> Plusieurs groupes se sont produits dans nos salles de concerts.</h1>
+    <br>
+    <div class="container">
+    {% for band in bands %}
+    <div class="card" style="width: 18rem;">
+        <img class="card-img-top" src="{{ asset('images/'~ band.picture) }}" alt="Card image for band">
+        <div class="card-body">
+            <p class="card-text"><a href="{{ path('band_show', {id: band.id}) }}">{{ band.name|e }}</a>
+            </p>
+        </div>
+    </div>
+        </div>
+    {% endfor %}
+    <br><br>
+
+    {% if is_granted('ROLE_ADMIN') %}
+        <div class="text-center">
+        {% for band in bands %}
+        <a href="{{ path('create_band')}}" class="btn btn-primary">Créer un nouveau groupe</a>
+        <a href="{{ path('edit_band', {id: band.id}) }}" class="btn btn-primary">Modifier</a>
+        <a href="{{ path('delete_band', {id: band.id}) }}" class="btn btn-danger">Supprimer</a>
+        {% endfor %}
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

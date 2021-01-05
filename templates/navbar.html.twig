@@ -1,0 +1,39 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="/concertProject/public">Accueil</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="/concertProject/public/bands">Groupes</a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="/concertProject/public/concerts">Concerts</a>
+            </li>
+        </ul>
+
+    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+        <ul class="navbar-nav ml-auto">
+            <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color:white; background-color: transparent;">
+                Bienvenue {{ app.user.firstName }}
+            </button>
+            <div class="dropdown-menu">
+              <a class="dropdown-item" href="/concertProject/public/account">Mes informations</a>
+              <a class="dropdown-item" href="/concertProject/public/logout">Se déconnecter</a>
+            </div>
+        </ul>
+
+    {% else %}
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="/concertProject/public/login">Login</a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="/concertProject/public/register">Créer un compte</a>
+            </li>
+        </ul>
+    </div>
+    {% endif %}
+</nav>
